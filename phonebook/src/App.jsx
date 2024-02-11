@@ -6,7 +6,14 @@ const App = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setPersons(persons.concat({ name: newName }));
+    let notThere = true;
+    persons.forEach((person) => {
+      if (person.name === newName) {
+        alert(`${newName} is already used`);
+        notThere = false;
+      }
+    });
+    if (notThere) setPersons(persons.concat({ name: newName }));
   };
 
   const handleChange = (event) => {
