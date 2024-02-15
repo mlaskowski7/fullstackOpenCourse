@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Persons from "./components/Persons";
 import Form from "./components/Form";
-import axios from "axios";
+import phonebookService from "./services/phonebook";
 
 const App = () => {
   useEffect(() => {
     console.log("effect");
-    axios.get("http://localhost:3001/persons").then((response) => {
+    phonebookService.getAll().then((response) => {
       console.log("fullfiled");
       setPersons(response.data);
     });
@@ -30,9 +30,13 @@ const App = () => {
       }
     });
     if (notThere) {
-      setPersons(persons.concat({ name: newName, number: newNumber }));
-      setNewName("");
-      setNewNumber("");
+      phonebookService
+        .post({ name: newName, number: newNumber })
+        .then((response) => {
+          setPersons(persons.concat(response.data));
+          setNewName("");
+          setNewNumber("");
+        });
     }
   };
 
