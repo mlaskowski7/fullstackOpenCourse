@@ -9,4 +9,8 @@ const post = (postObject) => {
   return axios.post(url, postObject);
 };
 
-export default { getAll, post };
+const deletePerson = (id) => {
+  return axios.delete(`http://localhost:3001/persons/${id}`);
+};
+
+export default { getAll, post, deletePerson };

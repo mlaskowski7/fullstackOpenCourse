@@ -17,6 +17,14 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [search, setSearch] = useState("");
 
+  const deleteHandler = (person) => {
+    if (window.confirm("Are you sure you want to delete the person?")) {
+      phonebookService.deletePerson(person.id).then(() => {
+        setPersons(persons.filter((filtering) => filtering.id != person.id));
+      });
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     let notThere = true;
@@ -75,6 +83,7 @@ const App = () => {
         search={search}
         persons={persons}
         filteredPersons={filteredPersons}
+        deleteHandler={deleteHandler}
       />
     </div>
   );
