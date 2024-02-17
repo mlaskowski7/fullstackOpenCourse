@@ -28,6 +28,12 @@ app.get("/api/persons", (request, response) => {
   response.json(persons);
 });
 
+app.get("/api/persons/:id", (request, response) => {
+  const id = Number(request.params.id);
+  const person = persons.find((person) => person.id === id);
+  response.json(person);
+});
+
 const date = new Date();
 
 app.get("/info", (request, response) => {
